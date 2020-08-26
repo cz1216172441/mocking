@@ -1,19 +1,32 @@
 package parking;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class VipParkingStrategyTest {
+
+    @InjectMocks
+    private VipParkingStrategy vipParkingStrategy;
+
+    @Mock
+    private CarDaoImpl carDao;
 
 	@Test
     public void testPark_givenAVipCarAndAFullParkingLog_thenGiveAReceiptWithCarNameAndParkingLotName() {
 
 	    /* Exercise 4, Write a test case on VipParkingStrategy.park()
 	    * With using Mockito spy, verify and doReturn */
+
         //given
         VipParkingStrategy vipParkingStrategy = spy(new VipParkingStrategy());
         Car vipCar1 = new Car("vipCar1");
@@ -71,6 +84,16 @@ public class VipParkingStrategyTest {
          * You may refactor the code, or try to use
          * use @RunWith(MockitoJUnitRunner.class), @Mock (use Mockito, not PowerMock) and @InjectMocks
          */
+
+        //given
+        Car vipCar = new Car("A");
+        when(carDao.isVip(anyString())).thenReturn(true);
+
+        //when
+        boolean actual = vipParkingStrategy.isAllowOverPark(vipCar);
+
+        //then
+        assertTrue(actual);
     }
 
     @Test
@@ -80,6 +103,16 @@ public class VipParkingStrategyTest {
          * You may refactor the code, or try to use
          * use @RunWith(MockitoJUnitRunner.class), @Mock (use Mockito, not PowerMock) and @InjectMocks
          */
+
+        //given
+        Car vipCar = new Car("B");
+        when(carDao.isVip(anyString())).thenReturn(true);
+
+        //when
+        boolean actual = vipParkingStrategy.isAllowOverPark(vipCar);
+
+        //then
+        assertFalse(actual);
     }
 
     @Test
