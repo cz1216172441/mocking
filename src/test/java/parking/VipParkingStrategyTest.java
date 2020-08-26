@@ -59,7 +59,7 @@ public class VipParkingStrategyTest {
         //given
         VipParkingStrategy vipParkingStrategy = spy(new VipParkingStrategy());
         Car vipCar1 = createMockCar("vipCar1");
-        Car vipCar2 = createMockCar("vipCar2");
+        Car notVipCar2 = createMockCar("notVipCar2");
         List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = new ParkingLot("vipParkingLot", 1);
         parkingLot.getParkedCars().add(vipCar1);
@@ -68,11 +68,11 @@ public class VipParkingStrategyTest {
         when(carDao.isVip(anyString())).thenReturn(false);
 
         //when
-        Receipt actualReceipt = vipParkingStrategy.park(parkingLots, vipCar2);
+        Receipt actualReceipt = vipParkingStrategy.park(parkingLots, notVipCar2);
 
         //then
-        verify(vipParkingStrategy, times(1)).createNoSpaceReceipt(vipCar2);
-        assertEquals("vipCar2", actualReceipt.getCarName());
+        verify(vipParkingStrategy, times(1)).createNoSpaceReceipt(notVipCar2);
+        assertEquals("notVipCar2", actualReceipt.getCarName());
         assertEquals("No Parking Lot", actualReceipt.getParkingLotName());
 
     }
@@ -123,11 +123,11 @@ public class VipParkingStrategyTest {
          */
 
         //given
-        Car vipCar = createMockCar("A");
+        Car notVipCar = createMockCar("A");
         when(carDao.isVip(anyString())).thenReturn(false);
 
         //when
-        boolean actual = vipParkingStrategy.isAllowOverPark(vipCar);
+        boolean actual = vipParkingStrategy.isAllowOverPark(notVipCar);
 
         //then
         assertFalse(actual);
@@ -141,11 +141,11 @@ public class VipParkingStrategyTest {
          */
 
         //given
-        Car vipCar = createMockCar("B");
+        Car notVipCar = createMockCar("B");
         when(carDao.isVip(anyString())).thenReturn(false);
 
         //when
-        boolean actual = vipParkingStrategy.isAllowOverPark(vipCar);
+        boolean actual = vipParkingStrategy.isAllowOverPark(notVipCar);
 
         //then
         assertFalse(actual);
