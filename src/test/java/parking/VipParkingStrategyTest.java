@@ -1,7 +1,6 @@
 package parking;
 
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +23,8 @@ public class VipParkingStrategyTest {
         ParkingLot parkingLot1 = new ParkingLot("vipParkingLot2", 1);
         parkingLots.add(parkingLot);
         parkingLots.add(parkingLot1);
+        CarDaoImpl carDao = mock(CarDaoImpl.class);
+        when(carDao.isVip(anyString())).thenReturn(true);
         Receipt actualReceipt = vipParkingStrategy.park(parkingLots, vipCar2);
         verify(vipParkingStrategy, times(1)).createReceipt(parkingLot1, vipCar2);
         assertEquals("vipCar2", actualReceipt.getCarName());
@@ -36,6 +37,8 @@ public class VipParkingStrategyTest {
 
         /* Exercise 4, Write a test case on VipParkingStrategy.park()
          * With using Mockito spy, verify and doReturn */
+
+
     }
 
     @Test
