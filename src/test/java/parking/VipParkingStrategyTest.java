@@ -29,8 +29,8 @@ public class VipParkingStrategyTest {
 
         //given
         VipParkingStrategy vipParkingStrategy = spy(new VipParkingStrategy());
-        Car vipCar1 = new Car("vipCar1");
-        Car vipCar2 = new Car("vipCar2");
+        Car vipCar1 = createMockCar("vipCar1");
+        Car vipCar2 = createMockCar("vipCar2");
         List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = new ParkingLot("vipParkingLot", 1);
         parkingLot.getParkedCars().add(vipCar1);
@@ -58,8 +58,8 @@ public class VipParkingStrategyTest {
 
         //given
         VipParkingStrategy vipParkingStrategy = spy(new VipParkingStrategy());
-        Car vipCar1 = new Car("vipCar1");
-        Car vipCar2 = new Car("vipCar2");
+        Car vipCar1 = createMockCar("vipCar1");
+        Car vipCar2 = createMockCar("vipCar2");
         List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot = new ParkingLot("vipParkingLot", 1);
         parkingLot.getParkedCars().add(vipCar1);
@@ -86,7 +86,7 @@ public class VipParkingStrategyTest {
          */
 
         //given
-        Car vipCar = new Car("A");
+        Car vipCar = createMockCar("A");
         when(carDao.isVip(anyString())).thenReturn(true);
 
         //when
@@ -105,7 +105,7 @@ public class VipParkingStrategyTest {
          */
 
         //given
-        Car vipCar = new Car("B");
+        Car vipCar = createMockCar("B");
         when(carDao.isVip(anyString())).thenReturn(true);
 
         //when
@@ -123,7 +123,7 @@ public class VipParkingStrategyTest {
          */
 
         //given
-        Car vipCar = new Car("A");
+        Car vipCar = createMockCar("A");
         when(carDao.isVip(anyString())).thenReturn(false);
 
         //when
