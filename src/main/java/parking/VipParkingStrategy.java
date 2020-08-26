@@ -30,7 +30,7 @@ public class VipParkingStrategy implements ParkingStrategy {
 		return createNoSpaceReceipt(car);
 	}
 
-	private Receipt createReceipt(ParkingLot parkingLot, Car car) {
+	protected Receipt createReceipt(ParkingLot parkingLot, Car car) {
 		
 		Receipt receipt = new Receipt();
 		receipt.setCarName(car.getName());
@@ -38,7 +38,7 @@ public class VipParkingStrategy implements ParkingStrategy {
 		return receipt;
 	}
 
-	private Receipt createNoSpaceReceipt(Car car) {
+	protected Receipt createNoSpaceReceipt(Car car) {
 		
 		Receipt receipt = new Receipt();
 		receipt.setCarName(car.getName());
