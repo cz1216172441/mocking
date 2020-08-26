@@ -2,19 +2,12 @@ package parking;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class InOrderParkingStrategyTest {
 
@@ -76,6 +69,10 @@ public class InOrderParkingStrategyTest {
     public void testPark_givenNoAvailableParkingLot_thenCreateNoSpaceReceipt(){
 
 	    /* Exercise 2: Test park() method. Use Mockito.spy and Mockito.verify to test the situation for no available parking lot */
+        InOrderParkingStrategy inOrderParkingStrategy = spy(new InOrderParkingStrategy());
+        Car car = new Car("CAR");
+        inOrderParkingStrategy.park(null, car);
+        verify(inOrderParkingStrategy, times(1)).createNoSpaceReceipt(car);
 
     }
 
@@ -83,6 +80,7 @@ public class InOrderParkingStrategyTest {
     public void testPark_givenThereIsOneParkingLotWithSpace_thenCreateReceipt(){
 
         /* Exercise 2: Test park() method. Use Mockito.spy and Mockito.verify to test the situation for one available parking lot */
+
 
     }
 
