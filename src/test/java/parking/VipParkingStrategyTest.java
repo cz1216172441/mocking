@@ -14,6 +14,7 @@ public class VipParkingStrategyTest {
 
 	    /* Exercise 4, Write a test case on VipParkingStrategy.park()
 	    * With using Mockito spy, verify and doReturn */
+        //given
         VipParkingStrategy vipParkingStrategy = spy(new VipParkingStrategy());
         Car vipCar1 = new Car("vipCar1");
         Car vipCar2 = new Car("vipCar2");
@@ -25,7 +26,11 @@ public class VipParkingStrategyTest {
         parkingLots.add(parkingLot1);
         CarDaoImpl carDao = mock(CarDaoImpl.class);
         when(carDao.isVip(anyString())).thenReturn(true);
+
+        //when
         Receipt actualReceipt = vipParkingStrategy.park(parkingLots, vipCar2);
+
+        //then
         verify(vipParkingStrategy, times(1)).createReceipt(parkingLot1, vipCar2);
         assertEquals("vipCar2", actualReceipt.getCarName());
         assertEquals("vipParkingLot2", actualReceipt.getParkingLotName());
@@ -38,6 +43,7 @@ public class VipParkingStrategyTest {
         /* Exercise 4, Write a test case on VipParkingStrategy.park()
          * With using Mockito spy, verify and doReturn */
 
+        //given
         VipParkingStrategy vipParkingStrategy = spy(new VipParkingStrategy());
         Car vipCar1 = new Car("vipCar1");
         Car vipCar2 = new Car("vipCar2");
@@ -47,7 +53,11 @@ public class VipParkingStrategyTest {
         parkingLots.add(parkingLot);
         CarDaoImpl carDao = mock(CarDaoImpl.class);
         when(carDao.isVip(anyString())).thenReturn(false);
+
+        //when
         Receipt actualReceipt = vipParkingStrategy.park(parkingLots, vipCar2);
+
+        //then
         verify(vipParkingStrategy, times(1)).createNoSpaceReceipt(vipCar2);
         assertEquals("vipCar2", actualReceipt.getCarName());
         assertEquals("No Parking Lot", actualReceipt.getParkingLotName());
